@@ -23,5 +23,10 @@ public class EmployeeController {
         return employeeService.findAll();
     }
 
+    @RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
+    public void addEmployee(){
+
+    }
+
 
 }
