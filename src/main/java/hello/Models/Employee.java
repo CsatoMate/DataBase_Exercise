@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -38,4 +38,11 @@ public class Employee {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
