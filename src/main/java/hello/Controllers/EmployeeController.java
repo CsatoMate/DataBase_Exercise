@@ -23,7 +23,7 @@ public class EmployeeController {
     }
 
     /** Add new Employee to database */
-    @RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addEmployee(@RequestParam(name = "name") String pName){
         Employee aEmployee = new Employee();
         aEmployee.setName(pName);
@@ -32,7 +32,7 @@ public class EmployeeController {
     }
 
     /** Delete Employee by ID */
-    @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET, params = "id")
+    @RequestMapping(value = "/delete", method = RequestMethod.GET, params = "id")
     public String deleteEmployeeID(@RequestParam(name = "id") Long pId) {
         Optional<Employee> deletedEmployee = employeeService.findById(pId);
         if (deletedEmployee.isPresent()){
@@ -46,7 +46,7 @@ public class EmployeeController {
     }
 
     /** Delete Employee by Name */
-    @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET, params = "name")
+    @RequestMapping(value = "/delete", method = RequestMethod.GET, params = "name")
     public String deleteEmployeeName(@RequestParam(name = "name") String pName) {
         List<Employee> allEmployee = employeeService.findAll();
         int aCount = 0;
@@ -65,19 +65,19 @@ public class EmployeeController {
     }
 
     /** Delete all Employees from database */
-    @RequestMapping(value = "/deleteAllEmployees", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteAll", method = RequestMethod.GET)
     public String deleteAllEmployees(){
         employeeService.deleteAllEmployees();
         return "All Employees deleted from database";
     }
 
     /** Update Employee by ID */
-    @RequestMapping(value = "/updateEmployeeByID", method = RequestMethod.GET)
-    public String updateByID(@RequestParam(name = "id") Long pId){
+    @RequestMapping(value = "/updateByID={id}", method = RequestMethod.GET)
+    public String updateByID(@PathVariable(value = "id") Long pId, @RequestParam(name = "name") String pName){
         Optional<Employee> updateEmployee = employeeService.findById(pId);
         if (updateEmployee.isPresent()){
             Employee aTemp = updateEmployee.get();
-            aTemp.setName("módosult");
+            aTemp.setName(pName);
             employeeService.saveEmployee(aTemp);
             return "Update is successfully";
         }
