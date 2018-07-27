@@ -15,7 +15,7 @@ public class Owners {
 
     @NotNull
     @Column(unique = true)
-    @Size(max = 5)
+    @Size(max = 10)
     private String ownerID;
 
     private String name;
