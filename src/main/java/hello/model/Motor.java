@@ -1,4 +1,4 @@
-package hello.Models;
+package hello.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Motors {
+public class Motor {
 
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Motors {
 
     private String brand;
 
-    public Motors() {
+    public Motor() {
     }
 
     public Long getId() {
@@ -62,7 +62,7 @@ public class Motors {
 
     @Override
     public String toString() {
-        return "Motors{" +
+        return "Motor{" +
                 "id=" + id +
                 ", motorID='" + motorID + '\'' +
                 ", motorName='" + motorName + '\'' +
@@ -74,5 +74,5 @@ public class Motors {
     @JoinColumn(name = "Owners_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Owners owner;
+    private Owner owner;
 }

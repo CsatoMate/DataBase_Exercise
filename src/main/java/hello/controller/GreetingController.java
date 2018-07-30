@@ -1,6 +1,6 @@
-package hello.Controllers;
+package hello.controller;
 
-import hello.Models.Greeting;
+import hello.model.Greeting;
 import hello.UpperFirstLetter;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +24,7 @@ public class GreetingController {
 
     @RequestMapping("/api/greeting/{usernames}")
     public Greeting greeting(@PathVariable(value = "usernames") String name) {
-        return new Greeting(String.format(template, ufl.MakeUpper(name)));
+        return new Greeting(String.format(template, ufl.makeUpper(name)));
     }
 
 

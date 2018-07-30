@@ -1,7 +1,7 @@
-package hello.Controllers;
+package hello.controller;
 
-import hello.Models.Owners;
-import hello.Services.OwnersService;
+import hello.model.Owner;
+import hello.service.OwnerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class OwnersController {
+public class OwnerController {
+
+    private final OwnerServiceImpl ownerService;
 
     @Autowired
-    private OwnersService ownersService;
+    public OwnerController(OwnerServiceImpl ownerService) {
+        this.ownerService = ownerService;
+    }
 
     @RequestMapping(value = "/owners", method = RequestMethod.GET)
     @ResponseBody
-    public List<Owners> findAll(){
-        return ownersService.findAll();
+    public List<Owner> findAll(){
+        return ownerService.findAll();
     }
 }

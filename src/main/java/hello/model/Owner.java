@@ -1,11 +1,11 @@
-package hello.Models;
+package hello.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Owners {
+public class Owner {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -20,10 +20,10 @@ public class Owners {
 
     private String name;
 
-    public Owners() {
+    public Owner() {
     }
 
-    public Owners(@NotNull @Size(max = 5) String ownerID) {
+    public Owner(@NotNull @Size(max = 5) String ownerID) {
         this.ownerID = ownerID;
     }
 
@@ -53,7 +53,7 @@ public class Owners {
 
     @Override
     public String toString() {
-        return "Owners{" +
+        return "Owner{" +
                 "id=" + id +
                 ", ownerID='" + ownerID + '\'' +
                 ", name='" + name + '\'' +
