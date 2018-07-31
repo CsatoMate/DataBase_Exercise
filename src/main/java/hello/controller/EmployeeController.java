@@ -26,29 +26,27 @@ public class EmployeeController {
     }
 
     /** Add new Employee to database */
-    @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.GET})
-    public Employee addEmployee(@RequestParam(name = "name") String pName){
-        Employee aEmployee = new Employee(pName);
-        employeeService.addEmployee(aEmployee);
-        return aEmployee;
+    @PostMapping("/add")
+    public Employee addEmployee(@RequestBody Employee pEmployee){
+        return employeeService.addEmployee(pEmployee);
     }
 
     /** Delete Employee by ID */
-    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET}, params = "id")
-    public Employee deleteEmployeeID(@RequestParam(name = "id") Long pId) {
+    @DeleteMapping("/deleteById/{pId}")
+    public Employee deleteEmployeeID(@PathVariable Long pId) {
         return employeeService.deleteByID(pId);
     }
 
     /** Delete Employee by Name */
-    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET}, params = "name")
-    public List<Employee> deleteEmployeeName(@RequestParam(name = "name") String pName) {
+    @DeleteMapping("/delete/{pName}")
+    public List<Employee> deleteEmployeeName(@PathVariable String pName) {
         return employeeService.deleteByName(pName);
     }
 
     /** Update Employee by ID */
-    @RequestMapping(value = "/updateByID={id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public Employee updateByID(@PathVariable(value = "id") Long pId, @RequestParam(name = "name") String pName){
-        return employeeService.update(pId, pName);
+    @PutMapping("/update/{pId}")
+    public Employee updateByID(@RequestBody Employee pEmployee, @PathVariable Long pId){
+        return employeeService.update(pId, pEmployee);
     }
 
 }

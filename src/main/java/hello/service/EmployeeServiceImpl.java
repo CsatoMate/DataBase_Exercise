@@ -9,7 +9,7 @@ import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
-    
+
     private final EmployeeRepository employeeRepository;
 
     @Autowired
@@ -29,8 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public void addEmployee(Employee pEmployee) {
+    public Employee addEmployee(Employee pEmployee) {
         employeeRepository.save(pEmployee);
+        return pEmployee;
     }
 
     @Override
@@ -84,17 +85,14 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     /** Update Employee by ID */
-    public Employee update(Long pId, String pName){
+    public Employee update(Long pId, Employee pEmployee){
         Optional<Employee> updateEmployee = findById(pId);
-        if (updateEmployee.isPresent()){
-            Employee aTemp = updateEmployee.get();
-            aTemp.setName(pName);
-            saveEmployee(aTemp);
-            return aTemp;
-        }
-        else{
+        if (!updateEmployee.isPresent()){
             return null;
         }
+        pEmployee.setId(pId);
+        saveEmployee(pEmployee);
+        return  pEmployee;
     }
 
 
